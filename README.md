@@ -19,7 +19,7 @@ git checkout v6.1
 
 tt100k数据集  下载地址：[TT100K](http://cg.cs.tsinghua.edu.cn/traffic-sign/data_model_code/data.zip)
 
-使用[脚本](./data_preprocess.py)转换后得到数据集
+使用[脚本](./tools/data_preprocess.py)转换后得到数据集
 
 ![image-20230802191844345](assets/image-20230802191844345.png)
 
@@ -115,7 +115,7 @@ detection num: 3
 
 ```
 
-![image-20230803150532825](/home/ruoji/.config/Typora/typora-user-images/image-20230803150532825.png)
+![image-20230803150532825](assets/image-20230803150532825.png)
 
 
 
@@ -156,9 +156,10 @@ make && make install
 
 
 
-四 测试模型
+### 四 测试模型
 
 需要在linux下安装opencv，这里我没有添加第三方库，所以需要自己安装opencv
+sudo apt-get install libopencv-dev
 
 ```
 mkdir build
@@ -190,8 +191,8 @@ detection num: 7
 14:  35%, [ 493,  997,  506, 1011], pne
 ```
 
-![image-20230803155110494](/home/ruoji/.config/Typora/typora-user-images/image-20230803155110494.png)
+![image-20230803155110494](assets/image-20230803155110494.png)
 
-#### 四 后续
+### 五 后续
 
 量化int8和uint8，然后在khadas vim3上进行部署。

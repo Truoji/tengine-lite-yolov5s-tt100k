@@ -460,8 +460,9 @@ int main(int argc, char* argv[])
     struct options opt;
     opt.num_thread = num_thread;
     opt.cluster = TENGINE_CLUSTER_ALL;
-    opt.precision = TENGINE_MODE_FP32;
+    opt.precision = TENGINE_MODE_INT8;
     opt.affinity = 0;
+
 
     /* inital tengine */
     if (init_tengine() != 0)
@@ -500,12 +501,12 @@ int main(int argc, char* argv[])
         return -1;
     }
 
-    if (set_tensor_buffer(input_tensor, input_data.data(), img_size * sizeof(float)) < 0)
+    if (set_tensor_buffer(input_tensor, input_data.data(), img_size) < 0)
     {
         fprintf(stderr, "Set input tensor buffer failed\n");
         return -1;
     }
-
+    
     /* prerun graph, set work options(num_thread, cluster, precision) */
     if (prerun_graph_multithread(graph, opt) < 0)
     {
@@ -556,8 +557,8 @@ int main(int argc, char* argv[])
     float* p32_data = (float*)get_tensor_buffer(p32_output);
 
     /* postprocess */
-    const float prob_threshold = 0.25f;
-    const float nms_threshold = 0.45f;
+    const float prob_threshold = 0.50f;
+    const float nms_threshold = 0.60f;
 
     std::vector<Object> proposals;
     std::vector<Object> objects8;
